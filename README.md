@@ -3,6 +3,9 @@ Code for the hands-on experiments done during the presentation of course "Traini
 
 ## Module 4
 1. Go to https://github.com/settings/tokens and create new token by clicking `Generate New Token` button. Give read access to public repositories.
+    ```
+    We are doing this because we will construct a dataset comprising of open source libraries from huggingface.
+    ```
 2. Copy the access token and set the env variable via `export GH_ACCESS_TOKEN=<copied access token>`.
 3. `cd dataset_creation` and Run `python clone_hf_repos.py`
 4. The data in `hf_public_repos` folder in current repo should look like below:
@@ -10,15 +13,23 @@ Code for the hands-on experiments done during the presentation of course "Traini
 accelerate          candle   datasets       diffusers               notebooks  pytorch-image-models       tokenizers    trl
 alignment-handbook  chat-ui  deep-rl-class  diffusion-models-class  peft       text-generation-inference  transformers
 ```
-5. Download nltk punkt
+5. Download nltk punkt 
+
 ```python
+# Opent the terminal, start python then download it!
 import nltk
 nltk.download('punkt')
+# then enter exit()
 ```
 6. Run Data Pipeline on a machine with 16 CPUs:
+
+**pipeline.py:** does the data preprocessing and data deduplication
+**About datatrove:** huggingface library for data preprocessing for pretraining and fine tuning
+
 ```
-python pipeline.py
+python pipeline.py 
 ```
+
 7. Collate and push to hub:
 ```
 python prepare_hf_dataset.py

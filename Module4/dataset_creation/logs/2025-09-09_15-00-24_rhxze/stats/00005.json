@@ -1,0 +1,51 @@
+[
+    {
+        "name": "\ud83d\udcd6 - READER: \ud83d\udc3f Jsonl",
+        "time_stats": {
+            "total": 0.029541300031269202,
+            "n": 751,
+            "mean": 3.933595210555149e-05,
+            "variance": 3.72585992395029e-09,
+            "std_dev": 6.103982244363339e-05,
+            "min": 4.4579974201042205e-06,
+            "max": 0.0009700830014480744,
+            "total_human": "0 seconds",
+            "mean_human": "0.04 milliseconds",
+            "std_dev_human": "0.06 milliseconds",
+            "min_human": "0.00 milliseconds",
+            "max_human": "0.97 milliseconds"
+        },
+        "stats": {
+            "input_files": 1,
+            "doc_len": {
+                "total": 9593204,
+                "n": 751,
+                "mean": 12773.906790945419,
+                "variance": 351338922.929967,
+                "std_dev": 18744.03699660153,
+                "min": 5,
+                "max": 206285
+            },
+            "documents": {
+                "total": 751,
+                "mean": 751.0,
+                "unit": "input_file"
+            }
+        }
+    },
+    {
+        "name": "\ud83e\udec2 - DEDUP: \ud83c\udfaf MinHash stage 1",
+        "time_stats": {
+            "total": 15.415370416001679,
+            "mean": 15.415370416001679,
+            "total_human": "15 seconds",
+            "mean_human": "15 seconds and 415.37 milliseconds",
+            "std_dev_human": "0 milliseconds",
+            "min_human": "15 seconds and 415.37 milliseconds",
+            "max_human": "15 seconds and 415.37 milliseconds"
+        },
+        "stats": {
+            "total": 751
+        }
+    }
+]

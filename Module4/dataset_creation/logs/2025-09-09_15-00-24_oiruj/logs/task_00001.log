@@ -1,0 +1,27 @@
+2025-09-09 15:00:46.731 | INFO     | datatrove.utils.logging:add_task_logger:58 - Launching pipeline for rank=1
+2025-09-09 15:00:46.731 | INFO     | datatrove.utils.logging:log_pipeline:90 - 
+--- 🛠️ PIPELINE 🛠
+📖 - READER: 🐿 Jsonl
+🔢 - TOKENIZER: 📊 Counter
+🫂 - DEDUP: 🎯 MinHash stage 4
+💽 - WRITER: 🐿 Jsonl
+2025-09-09 15:00:46.736 | INFO     | datatrove.pipeline.readers.base:read_files_shard:201 - Reading input file 00001.jsonl.gz, 1/1
+2025-09-09 15:00:55.593 | SUCCESS  | datatrove.executor.base:_run_for_rank:98 - Processing done for rank=1
+2025-09-09 15:00:55.598 | INFO     | datatrove.executor.base:_run_for_rank:104 - 
+
+📉📉📉 Stats: Task 1 📉📉📉
+
+Total Runtime: 8 seconds
+
+📖 - READER: 🐿 Jsonl
+    Runtime: (0.21%) 0 seconds [0.02 milliseconds±0.06 milliseconds/doc]
+    Stats: {input_files: 1, doc_len: 10987521 [min=16, max=264177, 14928.70±25117/doc], documents: 736 [736.00/input_file]}
+🔢 - TOKENIZER: 📊 Counter
+    Runtime: (91.00%) 7 seconds [7 seconds and 547.02 milliseconds±0 milliseconds/batch]
+    Stats: {tokens: 4951571 [min=4, max=125916, 6727.68±12049/doc]}
+🫂 - DEDUP: 🎯 MinHash stage 4
+    Runtime: (1.50%) 0 seconds [0.17 milliseconds±1.52 milliseconds/doc]
+    Stats: {total: 736, forwarded: 638, dropped: 98}
+💽 - WRITER: 🐿 Jsonl
+    Runtime: (7.29%) 0 seconds [0.95 milliseconds±2.23 milliseconds/doc]
+    Stats: {XXXXX.jsonl.gz: 638, total: 638, doc_len: 9602167 [min=16, max=264177, 15050.42±24633/doc], doc_len_tokens: 4303530 [min=4, max=125916, 6745.34±11528/doc]}

@@ -1,0 +1,42 @@
+{
+    "pipeline": [
+        {
+            "input_folder": "DataFolder(path='/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/Module4/dataset_creation/buckets', fs=<fsspec.implementations.local.LocalFileSystem object at 0x111193380>)",
+            "output_folder": "DataFolder(path='/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/Module4/dataset_creation/remove_ids', fs=<fsspec.implementations.local.LocalFileSystem object at 0x111193380>)",
+            "config": {
+                "n_grams": 5,
+                "num_buckets": 14,
+                "hashes_per_bucket": 8,
+                "seed": 1,
+                "norm_config": {
+                    "lowercase": true,
+                    "norm_whitespace": true,
+                    "remove_punctuation": true,
+                    "norm_unicode_diacritics": true,
+                    "norm_numbers": true,
+                    "norm_weekdays": false,
+                    "norm_monthnames": false
+                },
+                "hash_config": {
+                    "precision": 64,
+                    "hash_fc": "xxhash"
+                }
+            },
+            "save_cluster_id": false,
+            "save_cluster_size": false,
+            "ignore_index_matches": false,
+            "lines_to_buffer": 5
+        }
+    ],
+    "logging_dir": "DataFolder(path='/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/Module4/dataset_creation/logs/2025-09-09_15-00-24_vgtki', fs=<fsspec.implementations.local.LocalFileSystem object at 0x111193380>)",
+    "skip_completed": true,
+    "randomize_start_duration": 0,
+    "tasks": 1,
+    "workers": 1,
+    "start_method": "forkserver",
+    "local_tasks": 1,
+    "local_rank_offset": 0,
+    "depends": null,
+    "_launched": true,
+    "world_size": 1
+}

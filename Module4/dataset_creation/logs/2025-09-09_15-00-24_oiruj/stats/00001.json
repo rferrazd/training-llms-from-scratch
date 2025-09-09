@@ -1,0 +1,121 @@
+[
+    {
+        "name": "\ud83d\udcd6 - READER: \ud83d\udc3f Jsonl",
+        "time_stats": {
+            "total": 0.017412694014637964,
+            "n": 736,
+            "mean": 2.3658551650323328e-05,
+            "variance": 3.3272223862109583e-09,
+            "std_dev": 5.768208028678368e-05,
+            "min": 2.0000006770715117e-06,
+            "max": 0.0011471249999885913,
+            "total_human": "0 seconds",
+            "mean_human": "0.02 milliseconds",
+            "std_dev_human": "0.06 milliseconds",
+            "min_human": "0.00 milliseconds",
+            "max_human": "1.15 milliseconds"
+        },
+        "stats": {
+            "input_files": 1,
+            "doc_len": {
+                "total": 10987521,
+                "n": 736,
+                "mean": 14928.697010869573,
+                "variance": 630872709.2182766,
+                "std_dev": 25117.179563364127,
+                "min": 16,
+                "max": 264177
+            },
+            "documents": {
+                "total": 736,
+                "mean": 736.0,
+                "unit": "input_file"
+            }
+        }
+    },
+    {
+        "name": "\ud83d\udd22 - TOKENIZER: \ud83d\udcca Counter",
+        "time_stats": {
+            "total": 7.547024040999531,
+            "mean": 7.547024040999531,
+            "unit": "batch",
+            "total_human": "7 seconds",
+            "mean_human": "7 seconds and 547.02 milliseconds",
+            "std_dev_human": "0 milliseconds",
+            "min_human": "7 seconds and 547.02 milliseconds",
+            "max_human": "7 seconds and 547.02 milliseconds"
+        },
+        "stats": {
+            "tokens": {
+                "total": 4951571,
+                "n": 736,
+                "mean": 6727.677989130433,
+                "variance": 145170147.85127,
+                "std_dev": 12048.657512406517,
+                "min": 4,
+                "max": 125916
+            }
+        }
+    },
+    {
+        "name": "\ud83e\udec2 - DEDUP: \ud83c\udfaf MinHash stage 4",
+        "time_stats": {
+            "total": 0.1243140940205194,
+            "n": 736,
+            "mean": 0.00016890501904961864,
+            "variance": 2.320690837620498e-06,
+            "std_dev": 0.0015233813828521398,
+            "min": 1.12499765236862e-06,
+            "max": 0.03362162499979604,
+            "total_human": "0 seconds",
+            "mean_human": "0.17 milliseconds",
+            "std_dev_human": "1.52 milliseconds",
+            "min_human": "0.00 milliseconds",
+            "max_human": "33.62 milliseconds"
+        },
+        "stats": {
+            "total": 736,
+            "forwarded": 638,
+            "dropped": 98
+        }
+    },
+    {
+        "name": "\ud83d\udcbd - WRITER: \ud83d\udc3f Jsonl",
+        "time_stats": {
+            "total": 0.6042648259899579,
+            "n": 638,
+            "mean": 0.0009471235517083978,
+            "variance": 4.956471749583941e-06,
+            "std_dev": 0.002226313488613843,
+            "min": 7.165999704739079e-06,
+            "max": 0.023111541999242036,
+            "total_human": "0 seconds",
+            "mean_human": "0.95 milliseconds",
+            "std_dev_human": "2.23 milliseconds",
+            "min_human": "0.01 milliseconds",
+            "max_human": "23.11 milliseconds"
+        },
+        "stats": {
+            "XXXXX.jsonl.gz": 638,
+            "total": 638,
+            "doc_len": {
+                "total": 9602167,
+                "n": 638,
+                "mean": 15050.418495297808,
+                "variance": 606791877.7727811,
+                "std_dev": 24633.14591709271,
+                "min": 16,
+                "max": 264177
+            },
+            "doc_len_tokens": {
+                "total": 4303530,
+                "n": 638,
+                "mean": 6745.344827586213,
+                "variance": 132898539.34401543,
+                "std_dev": 11528.162878100544,
+                "min": 4,
+                "max": 125916
+            }
+        }
+    }
+]

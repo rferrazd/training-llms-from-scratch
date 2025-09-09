@@ -8,9 +8,9 @@ deepspeed
 PyGithub
 flash-attn
 huggingface-hub
-evaluate
-datasets
-bitsandbytes
+evaluate 
+datasets 
+bitsandbytes 
 einops
 wandb
 tensorboard
@@ -21,3 +21,7 @@ scipy
 matplotlib
 sentencepiece
 nltk
+python-dotenv
+datatrove
+orjson
+spacy

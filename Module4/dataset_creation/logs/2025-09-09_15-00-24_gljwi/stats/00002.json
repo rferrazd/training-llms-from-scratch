@@ -1,0 +1,96 @@
+[
+    {
+        "name": "\ud83d\udcd6 - READER: \ud83d\udc7e PersonalCopilot",
+        "time_stats": {
+            "total": 0.013703842960239854,
+            "n": 876,
+            "mean": 1.5643656347305772e-05,
+            "variance": 3.723138849999783e-09,
+            "std_dev": 6.101752903879166e-05,
+            "min": 3.1660019885748625e-06,
+            "max": 0.0007577500000479631,
+            "total_human": "0 seconds",
+            "mean_human": "0.02 milliseconds",
+            "std_dev_human": "0.06 milliseconds",
+            "min_human": "0.00 milliseconds",
+            "max_human": "0.76 milliseconds"
+        },
+        "stats": {
+            "input_files": 876,
+            "doc_len": {
+                "total": 10497975,
+                "n": 876,
+                "mean": 11983.989726027388,
+                "variance": 443140214.3941805,
+                "std_dev": 21050.895809779224,
+                "min": 6,
+                "max": 269719
+            },
+            "documents": {
+                "total": 876,
+                "unit": "input_file"
+            }
+        }
+    },
+    {
+        "name": "\ud83d\udd3b - FILTER: \ud83e\uddd1\ud83c\udffd\u200d\ud83d\udcbb Code Filter",
+        "time_stats": {
+            "total": 0.6644658140357933,
+            "n": 876,
+            "mean": 0.00075852261876232,
+            "variance": 1.4094148029477726e-06,
+            "std_dev": 0.0011871877707202735,
+            "min": 5.000001692678779e-07,
+            "max": 0.012806834001821699,
+            "total_human": "0 seconds",
+            "mean_human": "0.76 milliseconds",
+            "std_dev_human": "1.19 milliseconds",
+            "min_human": "0.00 milliseconds",
+            "max_human": "12.81 milliseconds"
+        },
+        "stats": {
+            "total": 876,
+            "dropped": 143,
+            "forwarded": 733,
+            "doc_len": {
+                "total": 9887398,
+                "n": 733,
+                "mean": 13488.946793997286,
+                "variance": 483075731.81547093,
+                "std_dev": 21978.98386676397,
+                "min": 21,
+                "max": 269719
+            }
+        }
+    },
+    {
+        "name": "\ud83d\udcbd - WRITER: \ud83d\udc3f Jsonl",
+        "time_stats": {
+            "total": 0.7616538439942815,
+            "n": 733,
+            "mean": 0.0010390911923523626,
+            "variance": 2.226024109359277e-05,
+            "std_dev": 0.004718075994893762,
+            "min": 9.833001968218014e-06,
+            "max": 0.08459149999907822,
+            "total_human": "0 seconds",
+            "mean_human": "1.04 milliseconds",
+            "std_dev_human": "4.72 milliseconds",
+            "min_human": "0.01 milliseconds",
+            "max_human": "84.59 milliseconds"
+        },
+        "stats": {
+            "XXXXX.jsonl.gz": 733,
+            "total": 733,
+            "doc_len": {
+                "total": 9887398,
+                "n": 733,
+                "mean": 13488.946793997286,
+                "variance": 483075731.81547093,
+                "std_dev": 21978.98386676397,
+                "min": 21,
+                "max": 269719
+            }
+        }
+    }
+]

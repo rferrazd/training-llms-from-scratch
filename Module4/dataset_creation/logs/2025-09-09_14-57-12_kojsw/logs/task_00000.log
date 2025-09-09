@@ -1,0 +1,81 @@
+2025-09-09 14:57:12.944 | INFO     | datatrove.utils.logging:add_task_logger:58 - Launching pipeline for rank=0
+2025-09-09 14:57:12.945 | INFO     | datatrove.utils.logging:log_pipeline:90 - 
+--- 🛠️ PIPELINE 🛠
+📖 - READER: 👾 PersonalCopilot
+🔻 - FILTER: 🧑🏽‍💻 Code Filter
+💽 - WRITER: 🐿 Jsonl
+2025-09-09 14:57:12.945 | ERROR    | datatrove.executor.base:_run_for_rank:108 - 'int' object does not support the context manager protocol
+Traceback (most recent call last):
+
+  File "<string>", line 1, in <module>
+  File "/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/.venv/lib/python3.13/site-packages/multiprocess/forkserver.py", line 273, in main
+    code = _serve_one(child_r, fds,
+           │          │        └ [10, 11, 12, 13, 14, 15]
+           │          └ 8
+           └ <function _serve_one at 0x1058b3ec0>
+  File "/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/.venv/lib/python3.13/site-packages/multiprocess/forkserver.py", line 312, in _serve_one
+    code = spawn._main(child_r, parent_sentinel)
+           │     │     │        └ 4
+           │     │     └ 8
+           │     └ <function _main at 0x1058b3100>
+           └ <module 'multiprocess.spawn' from '/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/....
+  File "/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/.venv/lib/python3.13/site-packages/multiprocess/spawn.py", line 135, in _main
+    return self._bootstrap(parent_sentinel)
+           │    │          └ 4
+           │    └ <function BaseProcess._bootstrap at 0x104d1d9e0>
+           └ <ForkServerProcess name='ForkServerPoolWorker-2' parent=30292 started daemon>
+  File "/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/.venv/lib/python3.13/site-packages/multiprocess/process.py", line 314, in _bootstrap
+    self.run()
+    │    └ <function BaseProcess.run at 0x104d1cf40>
+    └ <ForkServerProcess name='ForkServerPoolWorker-2' parent=30292 started daemon>
+  File "/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/.venv/lib/python3.13/site-packages/multiprocess/process.py", line 108, in run
+    self._target(*self._args, **self._kwargs)
+    │    │        │    │        │    └ {}
+    │    │        │    │        └ <ForkServerProcess name='ForkServerPoolWorker-2' parent=30292 started daemon>
+    │    │        │    └ (<multiprocess.queues.SimpleQueue object at 0x11597fcb0>, <multiprocess.queues.SimpleQueue object at 0x115e4d310>, None, (), ...
+    │    │        └ <ForkServerProcess name='ForkServerPoolWorker-2' parent=30292 started daemon>
+    │    └ <function worker at 0x115e3ad40>
+    └ <ForkServerProcess name='ForkServerPoolWorker-2' parent=30292 started daemon>
+  File "/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/.venv/lib/python3.13/site-packages/multiprocess/pool.py", line 125, in worker
+    result = (True, func(*args, **kwds))
+                    │     │       └ {}
+                    │     └ (0,)
+                    └ functools.partial(<bound method LocalPipelineExecutor._launch_run_for_rank of <datatrove.executor.local.LocalPipelineExecutor...
+  File "/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/.venv/lib/python3.13/site-packages/datatrove/executor/local.py", line 76, in _launch_run_for_rank
+    return self._run_for_rank(rank, local_rank)
+           │    │             │     └ 0
+           │    │             └ 0
+           │    └ <function PipelineExecutor._run_for_rank at 0x1146831a0>
+           └ <datatrove.executor.local.LocalPipelineExecutor object at 0x104d281a0>
+> File "/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/.venv/lib/python3.13/site-packages/datatrove/executor/base.py", line 96, in _run_for_rank
+    deque(pipelined_data, maxlen=0)
+    │     └ <generator object DiskWriter.run at 0x115e65580>
+    └ <class 'collections.deque'>
+  File "/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/.venv/lib/python3.13/site-packages/datatrove/pipeline/writers/disk_base.py", line 178, in run
+    for document in data:
+                    └ <generator object BaseFilter.run at 0x115e4f380>
+  File "/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/.venv/lib/python3.13/site-packages/datatrove/pipeline/filters/base_filter.py", line 64, in run
+    for batch in batched(data, self.batch_size):
+                 │       │     │    └ 1
+                 │       │     └ 🔻 - FILTER: 🧑🏽‍💻 Code Filter
+                 │       └ <generator object BaseDiskReader.run at 0x115e65470>
+                 └ <function batched at 0x1159bd940>
+  File "/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/.venv/lib/python3.13/site-packages/datatrove/utils/batching.py", line 20, in batched
+    while batch := list(itertools.islice(it, n)):
+                        │         │      │   └ 1
+                        │         │      └ <generator object BaseDiskReader.run at 0x115e65470>
+                        │         └ <class 'itertools.islice'>
+                        └ <module 'itertools' (built-in)>
+  File "/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/.venv/lib/python3.13/site-packages/datatrove/pipeline/readers/base.py", line 235, in run
+    else list(get_shard_from_paths_file(self.paths_file, rank, world_size))
+              │                         │    │           │     └ 16
+              │                         │    │           └ 0
+              │                         │    └ -1
+              │                         └ 📖 - READER: 👾 PersonalCopilot
+              └ <function get_shard_from_paths_file at 0x11465dda0>
+  File "/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/.venv/lib/python3.13/site-packages/datatrove/io.py", line 405, in get_shard_from_paths_file
+    with open_file(paths_file, mode="rt") as f:
+         │         └ -1
+         └ <function open_file at 0x11465d9e0>
+
+TypeError: 'int' object does not support the context manager protocol

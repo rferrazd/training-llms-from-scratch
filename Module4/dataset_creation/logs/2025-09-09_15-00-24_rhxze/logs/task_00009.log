@@ -1,0 +1,20 @@
+2025-09-09 15:00:28.670 | INFO     | datatrove.utils.logging:add_task_logger:58 - Launching pipeline for rank=9
+2025-09-09 15:00:28.670 | INFO     | datatrove.utils.logging:log_pipeline:90 - 
+--- 🛠️ PIPELINE 🛠
+📖 - READER: 🐿 Jsonl
+🫂 - DEDUP: 🎯 MinHash stage 1
+2025-09-09 15:00:28.676 | INFO     | datatrove.pipeline.readers.base:read_files_shard:201 - Reading input file 00009.jsonl.gz, 1/1
+2025-09-09 15:00:45.466 | INFO     | datatrove.pipeline.dedup.minhash:run:262 - Sorting buckets...
+2025-09-09 15:00:45.483 | SUCCESS  | datatrove.executor.base:_run_for_rank:98 - Processing done for rank=9
+2025-09-09 15:00:45.485 | INFO     | datatrove.executor.base:_run_for_rank:104 - 
+
+📉📉📉 Stats: Task 9 📉📉📉
+
+Total Runtime: 16 seconds
+
+📖 - READER: 🐿 Jsonl
+    Runtime: (0.22%) 0 seconds [0.05 milliseconds±0.17 milliseconds/doc]
+    Stats: {input_files: 1, doc_len: 11557185 [min=14, max=630824, 15681.39±33731/doc], documents: 737 [737.00/input_file]}
+🫂 - DEDUP: 🎯 MinHash stage 1
+    Runtime: (99.78%) 16 seconds [16 seconds and 811.56 milliseconds±0 milliseconds/doc]
+    Stats: {total: 737}

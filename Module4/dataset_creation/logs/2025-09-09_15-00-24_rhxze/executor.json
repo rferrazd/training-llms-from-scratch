@@ -1,0 +1,60 @@
+{
+    "pipeline": [
+        {
+            "limit": -1,
+            "skip": 0,
+            "text_key": "text",
+            "id_key": "id",
+            "adapter": "<bound method BaseReader._default_adapter of \ud83d\udcd6 - READER: \ud83d\udc3f Jsonl>",
+            "_empty_warning": false,
+            "default_metadata": null,
+            "data_folder": "DataFolder(path='/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/Module4/dataset_creation/filtered_data', fs=<fsspec.implementations.local.LocalFileSystem object at 0x111193380>)",
+            "paths_file": null,
+            "recursive": true,
+            "glob_pattern": null,
+            "shuffle_files": false,
+            "file_progress": false,
+            "doc_progress": false,
+            "compression": "infer"
+        },
+        {
+            "output_folder": "DataFolder(path='/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/Module4/dataset_creation/signatures', fs=<fsspec.implementations.local.LocalFileSystem object at 0x111193380>)",
+            "config": {
+                "n_grams": 5,
+                "num_buckets": 14,
+                "hashes_per_bucket": 8,
+                "seed": 1,
+                "norm_config": {
+                    "lowercase": true,
+                    "norm_whitespace": true,
+                    "remove_punctuation": true,
+                    "norm_unicode_diacritics": true,
+                    "norm_numbers": true,
+                    "norm_weekdays": false,
+                    "norm_monthnames": false
+                },
+                "hash_config": {
+                    "precision": 64,
+                    "hash_fc": "xxhash"
+                }
+            },
+            "num_hashes": 112,
+            "_parameters": null,
+            "_hash_func": "<function xxhash64 at 0x11121ad40>",
+            "language": "eng",
+            "word_tokenizer": "<datatrove.utils.word_tokenizers.SpaCyTokenizer object at 0x11122c590>",
+            "skip_existing_sigs": false
+        }
+    ],
+    "logging_dir": "DataFolder(path='/Users/robertagarcia/Desktop/GenAI/Training LLMs from Scratch/training-llms-from-scratch/Module4/dataset_creation/logs/2025-09-09_15-00-24_rhxze', fs=<fsspec.implementations.local.LocalFileSystem object at 0x111193380>)",
+    "skip_completed": true,
+    "randomize_start_duration": 0,
+    "tasks": 16,
+    "workers": 16,
+    "start_method": "forkserver",
+    "local_tasks": 16,
+    "local_rank_offset": 0,
+    "depends": null,
+    "_launched": true,
+    "world_size": 16
+}

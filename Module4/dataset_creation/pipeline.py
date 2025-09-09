@@ -13,6 +13,21 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+This script orchestrates a multi-stage data processing pipeline for creating a deduplicated code dataset
+from open-source repositories (e.g., Hugging Face public repos). The pipeline performs the following steps:
+
+1. Reads and filters raw code data from cloned repositories using custom readers and filters.
+2. Computes MinHash signatures for deduplication, partitioning data into tasks for parallel processing.
+3. Groups MinHash signatures into buckets to efficiently find potential duplicate candidates.
+4. Clusters duplicate samples based on MinHash similarity, identifying groups of near-duplicate code.
+5. Removes all but one sample per duplicate cluster, producing a deduplicated dataset and reporting token counts.
+
+The pipeline uses the datatrove library for efficient, parallelized data processing and deduplication.
+DataTrove is a library to process, filter and deduplicate text data at a very large scale.
+
+"""
+
 from datatrove.executor.base import PipelineExecutor
 from datatrove.executor.local import LocalPipelineExecutor
 from datatrove.pipeline.dedup import MinhashDedupSignature
@@ -22,10 +37,11 @@ from datatrove.pipeline.dedup.minhash import (
     MinhashDedupCluster,
     MinhashDedupFilter,
 )
+from datatrove.utils.hashing import HashConfig
 from datatrove.pipeline.tokens import TokensCounter
 from datatrove.pipeline.readers import JsonlReader
 from datatrove.pipeline.writers.jsonl import JsonlWriter
-from reader import PersonalCopilotDatasetReader
+from reader import PersonalCopilotDatasetReader # Local import
 from filter import BasicCodeFilter
 
 MIRROR_DIRECTORY = "hf_public_repos"
@@ -33,23 +49,34 @@ TOTAL_TASKS = 16
 
 # you can also change ngrams or the number of buckets and their size here
 minhash_config = MinhashConfig(
-    use_64bit_hashes=True
+    # use_64bit_hashes=True
+    hash_config=HashConfig(precision=64)
 )  # better precision -> fewer false positives (collisions)
+
+# The directory should already exist with cloned repositories
+import os
+if not os.path.exists(MIRROR_DIRECTORY):
+    raise ValueError(f"Directory {MIRROR_DIRECTORY} does not exist. Please run clone_hf_repos.py first.")
 
 
 def run_code_dataset_generation():
     # stage 0 reads the code data and does basic filtering
     pipeline_0 = [
-        PersonalCopilotDatasetReader(data_folder=MIRROR_DIRECTORY),
+        # PersonalCopilotDatasetReader(data_folder=MIRROR_DIRECTORY)
+        PersonalCopilotDatasetReader(
+            data_folder=MIRROR_DIRECTORY,
+            paths_file=None,
+            recursive=True,
+        ),
         BasicCodeFilter(),
-        JsonlWriter(output_folder="filtered_data"),
+        JsonlWriter(output_folder="filtered_data"), # intermediate folder
     ]
 
     # stage 1 computes minhash signatures for each task (each task gets a set of files)
     pipeline_1 = [
         JsonlReader("filtered_data"),
         MinhashDedupSignature(
-            output_folder="signatures",
+            output_folder="signatures", # this output folder becomes input folder to the next stage
             config=minhash_config,
         ),
     ]
@@ -67,11 +94,12 @@ def run_code_dataset_generation():
     pipeline_3 = [
         MinhashDedupCluster(
             input_folder="buckets",
-            output_folder="remove_ids",
+            output_folder="remove_ids", # tells which ids to remove
             config=minhash_config,
         ),
     ]
 
+    # Tasks define the number of CPUs
     # stage 4 reads the original input data and removes all but 1 sample per duplicate cluster
     # the data must match exactly stage 1, so number of tasks and the input source must be the same
     pipeline_4 = [
@@ -81,7 +109,7 @@ def run_code_dataset_generation():
             input_folder="remove_ids",
             exclusion_writer=JsonlWriter("removed"),
         ),
-        JsonlWriter(output_folder="hf_stack"),
+        JsonlWriter(output_folder="hf_stack"), # FINAL CLEAN DATASET
     ]
 
     executor_0: PipelineExecutor = LocalPipelineExecutor(

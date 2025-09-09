@@ -13,6 +13,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+"""
+This module provides a custom dataset reader for processing code and notebook files,
+with filtering for unwanted file types and special handling for Jupyter notebooks.
+It includes utilities for segmenting notebook cells, cleaning markdown, and formatting
+the extracted content for downstream processing.
+"""
+
 import itertools
 import json
 import re
@@ -51,6 +58,15 @@ ANTI_FOMATS = tuple(IMAGE + VIDEO + DOC + AUDIO + ARCHIVE + OTHERS)
 
 
 def segment_blocks(content):
+    """
+    Segments the cells of a Jupyter notebook into their source and output components.
+
+    Args:
+        content (dict): The loaded JSON content of a Jupyter notebook.
+
+    Returns:
+        tuple: A tuple containing a list of [source, output] pairs and a list of cell types.
+    """
     cells = []
     cell_types = []
     for cell in content["cells"]:
@@ -66,6 +82,15 @@ def segment_blocks(content):
 
 
 def segment(sample):
+    """
+    Processes a Jupyter notebook sample, segmenting it into groups of cells and types.
+
+    Args:
+        sample (str): The JSON string of a Jupyter notebook.
+
+    Returns:
+        str: The parsed and formatted content extracted from the notebook.
+    """
     try:
         content = json.loads(sample)
         if "py" in json.dumps(content["metadata"]):
@@ -95,6 +120,15 @@ def segment(sample):
 
 
 def clean_markdown(text):
+    """
+    Cleans markdown text by removing HTML tags, newlines, and hash symbols.
+
+    Args:
+        text (str): The markdown text to clean.
+
+    Returns:
+        str: The cleaned markdown text.
+    """
     text = re.sub(r"<.*?>", "", text)
     text = re.sub(r"\n+", "", text)
     text = text.replace("#", "")
@@ -102,7 +136,15 @@ def clean_markdown(text):
 
 
 def parse_data(cells, types):
-    """Parse data into markdown-code pairs"""
+    """Parse data into markdown-code pairs
+
+    Args:
+        cells (list): List of cell groups.
+        types (list): List of cell types.
+
+    Returns:
+        str: The formatted content string with markdown, code, and output.
+    """
 
     content = ""
     if len(types) > 0:
@@ -135,6 +177,17 @@ def parse_data(cells, types):
 
 
 def build_content(markdown, code, output):
+    """
+    Builds a formatted string for a markdown, code, and output block.
+
+    Args:
+        markdown (str): The markdown text.
+        code (str): The code snippet.
+        output (str): The output of the code cell.
+
+    Returns:
+        str: The formatted content string.
+    """
     if len(output) > 1000:
         output_str = output[:1000] + "[...]"
     elif output == "_____no_output_____":
@@ -149,34 +202,77 @@ def build_content(markdown, code, output):
 
 
 class PersonalCopilotDatasetReader(BaseDiskReader):
+    """
+    Custom dataset reader for the PersonalCopilot project.
+
+    This reader filters out unwanted file types, processes Jupyter notebooks with special
+    segmentation, and yields documents with extracted text and metadata for downstream
+    data processing pipelines.
+    """
     name = "👾 PersonalCopilot"
 
     def __init__(
         self,
         data_folder: DataFolderLike,
+        paths_file: str = None,
         limit: int = -1,
-        progress: bool = False,
+        skip: int = 0,
+        file_progress: bool = False,
+        doc_progress: bool = False,
         adapter: Callable = None,
         text_key: str = "text",
         id_key: str = "id",
         default_metadata: dict = None,
         recursive: bool = True,
         glob_pattern: str | None = None,
+        shuffle_files: bool = False,
     ):
+        """
+        Initializes the PersonalCopilotDatasetReader.
+
+        Args:
+            data_folder (DataFolderLike): The folder containing the data to read.
+            paths_file (str, optional): File containing specific paths to read.
+            limit (int, optional): Maximum number of files to read.
+            skip (int, optional): Number of files to skip.
+            file_progress (bool, optional): Whether to show file progress.
+            doc_progress (bool, optional): Whether to show document progress.
+            adapter (Callable, optional): Adapter function for processing files.
+            text_key (str, optional): Key for text in the output dictionary.
+            id_key (str, optional): Key for id in the output dictionary.
+            default_metadata (dict, optional): Default metadata to attach to documents.
+            recursive (bool, optional): Whether to read files recursively.
+            glob_pattern (str, optional): Glob pattern for file selection.
+            shuffle_files (bool, optional): Whether to shuffle files before reading.
+        """
         super().__init__(
             data_folder,
+            paths_file,
             limit,
-            progress,
+            skip,
+            file_progress,
+            doc_progress,
             adapter,
             text_key,
             id_key,
             default_metadata,
             recursive,
             glob_pattern,
+            shuffle_files,
         )
         self.empty_warning = False
 
     def read_file(self, filepath: str):
+        """
+        Reads a file, filters out unwanted formats, processes Jupyter notebooks,
+        and yields a document with extracted text and metadata.
+
+        Args:
+            filepath (str): The path to the file to read.
+
+        Yields:
+            Document: A datatrove Document object with text and metadata.
+        """
         try:
             if filepath.endswith(ANTI_FOMATS) or any(
                 k in filepath for k in [".git", "__pycache__", "xcodeproj"]
