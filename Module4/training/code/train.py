@@ -75,7 +75,7 @@ class ModelArguments:
 @dataclass
 class DataTrainingArguments:
     dataset_name: Optional[str] = field(
-        default="smangrul/hug_stack",
+        default="Rogarcia18/hug_stack",
         metadata={"help": "The preference dataset to use."},
     )
     dataset_text_field: str = field(
@@ -83,6 +83,8 @@ class DataTrainingArguments:
     )
     max_seq_length: Optional[int] = field(default=4096)
     test_size: Optional[float] = field(default=0.1)
+    # fim (fill in the middle) is the training objective
+    # along with next token prediction (causal language modeling)
     fim_rate: Optional[float] = field(default=0.5)
     fim_spm_rate: Optional[float] = field(default=0.5)
     splits: Optional[str] = field(
@@ -154,7 +156,10 @@ class ConstantLengthDataset(IterableDataset):
             self.fim_rate = 0
 
     def __iter__(self):
+        # The __iter__ method makes this class an iterable, so it can be used in a for-loop or with iter().
+        # 'iterator = iter(self.dataset)' creates an iterator from the dataset, allowing us to fetch items one by one.
         iterator = iter(self.dataset)
+        # 'more_examples = True' is a flag used to control when to stop yielding data from the dataset.
         more_examples = True
         np_rng = np.random.RandomState(seed=self.seed)
         while more_examples:
@@ -254,8 +259,10 @@ def main(model_args, data_args, training_args):
     )
     train_dataset.start_iteration = 0
 
-    # create a model initialized with random weights
+    # create a model initialized with random weights -- here we are getting the entire architecture
     config = AutoConfig.from_pretrained(model_args.model_name_or_path)
+    
+    # HERE WE ARE CONSTRUCTING A NEW MODEL 
     model = AutoModelForCausalLM.from_config(
         config,
         attn_implementation="flash_attention_2"
@@ -263,6 +270,7 @@ def main(model_args, data_args, training_args):
         else "eager",
     )
     # resize embedding layers
+    # WE MUST RESIZE THE MODEL EMBEDDINGS SO THAT IT IS IN-SYNC WITH THE NEW TOKENIZER
     model.resize_token_embeddings(len(tokenizer), pad_to_multiple_of=8)
 
     # gradient ckpt
