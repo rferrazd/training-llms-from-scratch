@@ -1,5 +1,4 @@
 accelerate launch --config_file "configs/deepspeed_config.yaml"  code/train.py \
-    --seed 100 \
     --model_name_or_path "bigcode/starcoderbase-7b" \
     --tokenizer_model_name_or_path "Rogarcia18/hugcoder" \
     --dataset_name "Rogarcia18/hug_stack" \

@@ -1,6 +1,0 @@
-2025-09-09 14:58:50.434 | INFO     | datatrove.utils.logging:add_task_logger:58 - Launching pipeline for rank=8
-2025-09-09 14:58:50.434 | INFO     | datatrove.utils.logging:log_pipeline:90 - 
---- 🛠️ PIPELINE 🛠
-📖 - READER: 👾 PersonalCopilot
-🔻 - FILTER: 🧑🏽‍💻 Code Filter
-💽 - WRITER: 🐿 Jsonl

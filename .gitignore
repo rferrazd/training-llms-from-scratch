@@ -6,3 +6,8 @@
 __pycache__/
 **/__pycache__/
 *.pyc
+# ignore all log files and log directories
+*.log
+logs/
+**/logs/
+Module4/dataset_creation/logs/
