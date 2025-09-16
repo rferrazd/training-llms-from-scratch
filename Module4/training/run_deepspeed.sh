@@ -10,7 +10,7 @@ accelerate launch --config_file "configs/deepspeed_config.yaml"  code/train.py \
     --logging_steps 5 \
     --log_level "info" \
     --logging_strategy "steps" \
-    --evaluation_strategy "steps" \
+    --eval_strategy "steps" \
     --save_strategy "steps" \
     --push_to_hub \
     --hub_private_repo True \
