@@ -3,7 +3,7 @@ accelerate launch --config_file "configs/deepspeed_config.yaml"  code/train.py \
     --tokenizer_model_name_or_path "Rogarcia18/hugcoder" \
     --dataset_name "Rogarcia18/hug_stack" \
     --splits "train" \
-    --max_seq_length 512 \
+    --max_seq_length 256 \
     --max_steps 1000 \
     --save_steps 500 \
     --eval_steps 100 \
@@ -22,9 +22,9 @@ accelerate launch --config_file "configs/deepspeed_config.yaml"  code/train.py \
     --warmup_ratio 0.1 \
     --max_grad_norm 1.0 \
     --output_dir "hugcoder_dummy" \
-    --per_device_train_batch_size 4 \
-    --per_device_eval_batch_size 4 \
-    --gradient_accumulation_steps 16 \
+    --per_device_train_batch_size 1 \
+    --per_device_eval_batch_size 1 \
+    --gradient_accumulation_steps 32 \
     --gradient_checkpointing True \
     --use_reentrant False \
     --dataset_text_field "text" \
