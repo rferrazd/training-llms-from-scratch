@@ -268,6 +268,7 @@ def main(model_args, data_args, training_args):
         attn_implementation="flash_attention_2"
         if model_args.use_flash_attn
         else "eager",
+        torch_dtype=torch.bfloat16 if model_args.use_flash_attn else None,
     )
     # resize embedding layers
     # WE MUST RESIZE THE MODEL EMBEDDINGS SO THAT IT IS IN-SYNC WITH THE NEW TOKENIZER
