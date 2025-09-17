@@ -3,7 +3,7 @@ accelerate launch --config_file "configs/deepspeed_config.yaml"  code/train.py \
     --tokenizer_model_name_or_path "Rogarcia18/hugcoder" \
     --dataset_name "Rogarcia18/hug_stack" \
     --splits "train" \
-    --max_seq_length 2048 \
+    --max_seq_length 1024 \
     --max_steps 1000 \
     --save_steps 500 \
     --eval_steps 100 \
