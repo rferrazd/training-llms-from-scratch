@@ -1,10 +1,10 @@
 accelerate launch --config_file "configs/fsdp_config.yaml"  code/train.py \
 --seed 100 \
 --model_name_or_path "bigcode/starcoderbase-7b" \
---tokenizer_model_name_or_path "smangrul/hugcoder" \
---dataset_name "smangrul/hug_stack" \
+--tokenizer_model_name_or_path "Rogarcia18/hugcoder" \
+--dataset_name "Rogarcia18/hug_stack" \
 --splits "train" \
---max_seq_len 2048 \
+--max_seq_length 256 \
 --max_steps 1000 \
 --save_steps 500 \
 --eval_steps 100 \
@@ -22,14 +22,14 @@ accelerate launch --config_file "configs/fsdp_config.yaml"  code/train.py \
 --weight_decay 0.1 \
 --warmup_ratio 0.1 \
 --max_grad_norm 1.0 \
---output_dir "hugcoder-fsdp" \
---per_device_train_batch_size 14 \
---per_device_eval_batch_size 14 \
---gradient_accumulation_steps 4 \
+--output_dir "hugcoder_dummy" \
+--per_device_train_batch_size 1 \
+--per_device_eval_batch_size 1 \
+--gradient_accumulation_steps 32 \
 --gradient_checkpointing True \
 --use_reentrant False \
 --dataset_text_field "text" \
 --test_size 0.1 \
 --fim_rate 0.5 \
 --fim_spm_rate 0.5 \
---use_flash_attn True
+--use_flash_attn False
