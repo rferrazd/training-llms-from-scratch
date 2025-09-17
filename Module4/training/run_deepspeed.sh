@@ -31,4 +31,4 @@ accelerate launch --config_file "configs/deepspeed_config.yaml"  code/train.py \
     --test_size 0.1 \
     --fim_rate 0.5 \
     --fim_spm_rate 0.5 \
-    --use_flash_attn True
+    --use_flash_attn False
