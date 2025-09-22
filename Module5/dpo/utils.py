@@ -193,6 +193,7 @@ def create_and_prepare_model(args):
         )
         # Load the adapter a second time, with a different name, which will be our reference model.
         model.load_adapter(args.model_name_or_path, adapter_name="reference")
+                                        # reference model is NOT trained, it is used for computing the logics 
     else:
         model = args.model_name_or_path
         if args.use_peft_lora:
