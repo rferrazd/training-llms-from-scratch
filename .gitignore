@@ -11,3 +11,5 @@ __pycache__/
 logs/
 **/logs/
 Module4/dataset_creation/logs/
+# wandb
+Module5/ppo/wandb/
