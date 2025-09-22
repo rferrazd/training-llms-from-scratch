@@ -86,13 +86,14 @@ Use HuggingFace tokenizers library to build BPE tokenizer
 Set vocabulary size to 30,000 tokens
 Add special tokens: [PAD], [UNK], [CLS], [SEP], [MASK]
 Train on cleaned training data
+
 4. Tokenizer Evaluation
 Test tokenizer on validation and test splits
 Calculate metrics:
-Final vocabulary size
-Tokenization consistency across splits
-Average tokens per sentence
-Compression ratio (original chars / tokens)
+-> Final vocabulary size
+-> Tokenization consistency across splits
+-> Average tokens per sentence
+-> Compression ratio (original chars / tokens) or bytes / token
 5. Save & Demonstrate
 Save tokenizer in HuggingFace-compatible format
 Create demo script showing encode/decode functionality
